@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item,index) in list" :key="index">{{index}}-{{item}}</li>
+    </ul>
+
+    <ul>
+        <!--key是属性值-->
+        <li v-for="(value,key,index) in obj">
+            <span>{{index+1}}</span>
+            <span>{{key}}</span>
+            <span v-for="item in obj.value">{{item}}</span>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+        	list:['吃饭','睡觉','打豆豆'],
+            obj:{
+        		name:'zhh',
+                age:23,
+                hobby:['看电视','睡觉','吃饭']
+            }
+        }
+    })
+</script>
+</html>

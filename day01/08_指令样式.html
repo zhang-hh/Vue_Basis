@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .pink{
+            color: pink;
+        }
+        .test1{
+            color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--class我们称之为预定义属性-->
+    <!--zhh,我们称之为标签的自定义属性-->
+    <span :class="test1">我希望你幸福,lzz</span>
+    <!--    在vue里面@click后面加上函数(123),不是调用,而是函数传参
+        第一个默认传递的是event事件对象,如果一个参数你已经指定了,想要第二个参数是event那么就得自己传参
+        一定是 $event声明
+        -->
+    <button @click="toggle(123,$event)">click</button>
+    <br>
+    <span :style="style">虽然我说这些话就很虚伪,明明是我伤害了你</span>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new  Vue({
+        el:'#app',
+        data:{
+        	msg:'我希望你幸福',
+            /*只有class有这几种数据结构的选择
+            *   字符串,对象,数组 [{},{}] ['','']*/
+	        test1:{
+		        pink:true,
+	        },
+            /*class和style都会改变样式,style的结构是对象,或者是数组
+            *   {} [{}]*/
+            style:{
+	        	color:'skyblue',
+                fontSize:'20px',
+            }
+
+        },
+        methods:{
+        	toggle(c,event) {
+		        console.log(c);
+		        console.log(event);
+        		this.test1.pink = !this.test1.pink
+	        }
+        }
+    })
+</script>
+</body>
+</html>

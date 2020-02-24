@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--view-->
+<div id="app">
+  <p>{{msg}}</p>
+</div>
+<!--这个脚本会在window上注册一个全局变量:Vue(函数)-->
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  /*1.声明式编程
+  * 2.响应式数据:就是model里面的数据会自动跑到界面上(数据单向流)
+  * 3.数据双向流:v-model实现的 view-model,model-view
+  * 4.数据驱动
+  * */
+  //要在界面上展示的数据要先在data的配置项中先注册
+ new Vue({
+     el:'#app',
+     data:{ //model层
+     	msg:'愿得一人心,白首不分离',
+     }
+ })
+
+</script>
+</body>
+</html>

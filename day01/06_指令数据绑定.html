@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <span v-html="msg"></span> <!--v-html相当于原生的innerHTML,能将标签解析为HTML-->
+    <span v-text="val"></span> <!--v-text是把标签直接显示在界面-->'
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+        	msg:'<strong>人是不是犯贱呢?明明他对你那么好</strong>',
+            val:'<b>我也不知道自己怎么了,为啥那么执着</b>'
+        }
+    })
+</script>
+</html>

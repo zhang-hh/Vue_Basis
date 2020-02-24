@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul class="list">
+        <li v-for="(obj,index) in msg">
+            {{index+1}}--
+            <span v-for="value in obj">--{{value}}--</span>
+            <button @click="del(index)">del</button>
+            <button @click="update(index)">update</button>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:"#app",
+        data:{
+            msg:[{
+            	name:'张海慧',
+                age:18,
+                friend:'王晓丽'
+            },{
+	            name:'武凯心',
+	            age:18,
+	            friend:'王晓丽'
+            },{
+	            name:'张贤明',
+	            age:18,
+	            friend:'武宏壮'
+            }]
+        },
+        methods:{
+	        del(index){
+	        	this.msg.splice(index,1)
+	        },
+	        update(index){
+	        	//由于js的限制,vue不能直接通过index去修改数组的数据
+               /*vue只是监视了msg的改变,没有监视数组内部的改变
+               *  Vue重写了数组的一系列改变数组内部的数据的方法(先调用原生的,在更新界面)---实现了数据绑定*/
+
+                /* this.msg[index] = {
+                	name:'程程',
+                    age:'20',
+                    friend:'张小飞',
+                }*/
+               this.msg.splice(index,1,{
+               	    name:'魏胜男',
+	               age:'20',
+	               friend:'郭巧茹'})
+	        }
+        }
+    })
+</script>
+</body>
+</html>

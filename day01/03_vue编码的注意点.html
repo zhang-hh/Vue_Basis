@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:"#app",
+        data:{
+        	msg:'小猫拿到了小鱼干,是很开心的'
+        },
+        //组件被挂载
+        //不将VM暴露出来的话我们就在生命周期函数中写
+        //这里的this是vue的实例
+        mounted(){
+        	setTimeout(()=>{
+        		this.msg = '就是我很愧疚.说什么都没有用的!';
+        	},2000)
+        }
+    })
+</script>
+</html>

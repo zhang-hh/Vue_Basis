@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--如果是频繁的切换使用v-show 他使用的是display:none-->
+<!--    v-if是将他移除-->
+    <span v-if="flag" v-text="msg1"></span>
+    <span v-else-if="flag" v-text="msg2"></span>
+    <span v-else v-text="msg3"></span>
+    <p v-show="flag">成功</p>
+    <p v-show="!flag">失败</p>
+    <button @click="flag=!flag">切换</button>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+        	flag:true,
+            msg1:'我害怕面对你',
+            msg2:'我不知道怎么办',
+            msg3:'大家都觉得我是一个渣女把',
+        }
+    })
+</script>
+</html>

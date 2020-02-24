@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="serchName">
+    <ul>
+        <li v-for="(item,index) in filterMsg" :key="index">
+           {{index+1}}--{{item.name}}--{{item.age}}
+        </li>
+    </ul>
+    <button @click="setOrderType(1)">年龄升序</button>
+    <button @click="setOrderType(-1)">年龄降序</button>
+    <button @click="setOrderType(0)">原本顺序</button>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+	        serchName:'',
+	        orderType:0,//排序0为默认顺序,1为升序,-1为降序
+	        msg:[{name:'tom',age:18},
+                {name:'jack',age:16},
+                {name:'rose',age:20},
+		        {name:'json',age:17},
+		        {name:'dack',age:15},
+            ]
+        },
+        computed:{
+            filterMsg(){
+	            //	获取到相关的数据
+	            const {serchName,msg,orderType} = this;
+	            let newMsg;
+	            newMsg = msg.filter((item) =>{
+	                return item.name.indexOf(serchName) !== -1 ;
+	            })
+	            //进行排序
+	            if (orderType!== 0 ){
+		            // 1为升序,-1为降序
+		            newMsg.sort((p1,p2) =>{
+			            console.log(p1,p2)
+			            if (orderType==1) return p1.age - p2.age;
+			            else return p2.age - p1.age;
+		            })
+	            }
+                return newMsg;
+            }
+        },
+        methods:{
+	        setOrderType(num){
+	        	this.orderType = num;
+            }
+        }
+    })
+</script>
+</html>

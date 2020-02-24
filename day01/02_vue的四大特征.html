@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--    表单标签让我们有能力在view得到数据-->
+    <input type="text" v-model="msg"><br>
+    {{msg}}
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //vm 实例
+    //项目中用到的所有配置需要在界面上展示数据,一定要在data配置项注册
+    const vm = new Vue({
+        el:'#app',
+        data:{
+        	msg:'我好想你,真的'
+        }
+    });
+
+    setTimeout(()=>{
+    	vm.msg = '你应该不会答应我吧'
+    },2000)
+</script>
+</body>
+</html>
