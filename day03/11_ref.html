@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div ref="div">123</div>
+    <v-test ref="test"></v-test>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*
+    * ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。
+    如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；
+    如果用在子组件上，引用就指向组件实例
+*/
+	new Vue({
+		el:'#app',
+        components:{
+			'v-test':{
+				template:'<span>456</span>'
+            }
+        },
+        mounted(){
+	        console.log(this.$refs) //拿到dom节点
+        }
+	})
+</script>
+</html>

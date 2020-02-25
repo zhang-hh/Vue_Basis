@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app1">
+    {{test1}}
+</div>
+<div id="app2"> <!--根组件-->
+    {{test2}}
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+	//一个vue实例就是一个组件对象
+	const vm= new Vue({
+         el:'#app1',
+         name:'根组件',
+         data:{
+         	test1: '哈哈',
+             obj:{
+         		name:'zhh'
+             }
+             //data这个对象跑到vue里面会作为函数的返回值出来
+         },
+	 })
+
+	console.log(vm.$root === vm) //vm就是当前组件的根组件 true
+	console.log(vm.$el);//可以查看vue实例使用的根DOM元素
+	console.log(vm.$options)//当前实例的配置对象
+	console.log(vm.$options.name) //就可以知道当前组件的name是什么
+	console.log(vm.$data) //就是data里面的obj
+	new Vue({
+		el:'#app2',
+		data:{
+			test2: '哈哈',
+		},
+	})
+</script>
+</html>

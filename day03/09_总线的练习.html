@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <v-zhh title="zhh"></v-zhh>
+    <v-zhh title="zhx"></v-zhh>
+    <v-zhh title="qf"></v-zhh>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*
+    * Object.create是创建一个新对象,对象级别的继承
+    *  Object.create(null)可以创建一个没有隐式原型的空对象,不会对原型链产生影响
+    * */
+    //console.log(Object.create({a:1})) 创建了一个新对象 这个对象的隐式原型对象就是传进去的的对象
+    Vue.prototype.bus  = new Vue;
+    const a = {
+        props:["title"],
+        data(){
+	        return{
+            	newTitle:this.title,
+            }
+        },
+        template:'<b @click="handle">{{newTitle}}</b>', //这里的数据应该是自己转存的数据
+        mounted(){
+        	this.bus.$on('change',(title) =>{
+        		//这里的this分别是那三个组件,每一次挂载都会有自己的生命周期
+        	    //每一次执行此段代码都是在bus的change事件绑定回调
+                this.newTitle = title;
+        	})
+        },
+        methods:{
+        	handle(){
+        		//触发的是是三个不同的事件
+        		this.bus.$emit('change',this.newTitle)
+            }
+        }
+    }
+    new Vue({
+        el:'#app',
+        data:{
+
+        },
+        components:{
+        	'v-zhh':a,
+        }
+    })
+</script>
+</html>

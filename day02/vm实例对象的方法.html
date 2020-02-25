@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{test}} <!--模板就是根组件的子元素-->
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+   const vm = new Vue({
+       //el:'#app',
+       template:'<span>{{test}}</span>', //指定模板,就将<div id='#app'></div>替换
+       data:{
+			test:'test'
+       }
+	})
+   vm.$mount('#app')
+
+    /*
+    el:
+        1.确定了vue根组件挂载在那个节点底下
+        2.确定了根组件的模板
+    */
+</script>
+</html>

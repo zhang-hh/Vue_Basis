@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{test}}
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+   const vm = new Vue({
+       el:'#app',
+       data:{
+			test:'test'
+       }
+	})
+//    组件定义vue的自定义事件
+   vm.$on('zhh',() => {
+       console.log('我困了')
+   })
+
+   vm.$on('damu',() => {console.log('damu1')});
+   vm.$on('damu',() => {console.log('damu2')});
+   vm.$on('damu',() => {console.log('damu3')});
+   vm.$on('damu',() => {console.log('damu4')});
+   vm.$on('damu',() => {console.log('damu5')});
+
+   vm.$emit('damu')
+
+   //用这个注册自定义事件,只会触发一次,触发之后就会移出
+   // vm.$once('qf',() =>{
+	//    console.log('qf')
+   // })
+//    触发vue的自定义事件
+   setInterval(()=>{
+	   vm.$emit('zhh')
+   },1000)
+   // setInterval(()=>{
+	//    vm.$emit('qf')
+   // },100)
+
+//移出自定义事件
+    setTimeout(()=>{
+    	vm.$off('zhh')
+    },3000)
+
+
+
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <v-zhh></v-zhh>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //vue 子组件中不能使用el
+    //跟生命生命周期有关
+    Vue.component('v-zhh',{
+	    template: "<span>{{msg}}</span>",
+	    data(){
+		    return {
+			    msg:'好麻烦'
+		    }
+	    }
+    })
+    new Vue({
+	    el:'#app',
+	    data:{
+
+	    }
+    })
+</script>
+</html>

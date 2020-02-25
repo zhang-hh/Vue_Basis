@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #app{
+            margin: auto 100px;
+        }
+        .pink{
+            display: inline-block;
+            background-color: pink;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-a class="pink"></v-a>
+    <br><br>
+    <v-b class="pink"></v-b>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.prototype.bus = new Vue(); //总线
+    //bus就是一个一个组价,那么既然他是组件就可以自定义事件
+    //并且他是放在了Vue原型上的,那么通过Vue构造的实例就都可以访问到busl
+    const a = {
+    	data(){
+    		return {
+    			msg:'a-message'
+            }
+        },
+    	template:'<div>{{msg}}</div>',
+        //在v-a这个组件挂载时候给bus组件自定义一个事件
+        mounted(){
+    		//这里的this是 v-a这个组件
+            this.bus.$on('changeText',(msg) =>{
+            	this.msg = msg;
+            })
+        }
+    };
+    const b = {
+	    data(){
+		    return {
+			    msg:'b-message'
+		    }
+	    },
+	    template:'<div @click="changeB">{{msg}}</div>',
+	    methods:{
+		    changeB(){
+		    	//this是v-b 这个组件,来触发bus组件的自定义事件
+                this.bus.$emit('changeText',this.msg)
+		    }
+	    }
+    };
+
+    new Vue({
+        el:'#app',
+        components:{
+        	'v-a':a,
+            'v-b':b,
+        }
+    })
+</script>
+</html>

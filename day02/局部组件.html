@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <v-zhh></v-zhh>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el:'#app',
+		data:{
+			msg:"幸福右边 荒无人烟"
+		},
+		components:{
+			'v-zhh':{
+				template:'<div>{{msg}}</div>',
+                data(){
+					return {
+						msg:'真实麻烦',
+                    }
+                }
+            }
+        }
+	})
+</script>
+</html>

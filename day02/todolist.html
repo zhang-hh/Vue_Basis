@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="msg">
+    <button @click="add">add</button>
+<!--    组件间传递数据-->
+    <v-list :list="list"></v-list>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+	    el:'#app',
+        data:{
+            msg:'',
+            list:['吃饭','睡觉','打豆豆']
+        },
+	    components:{
+            'v-list':{
+		    	template:'<ul><li v-for="item in list">{{item}}</li></ul>',
+                props:['list']
+            }
+	    },
+	    methods: {
+		    add(){
+                this.list.push(this.msg);
+                this.msg = '';
+		    }
+	    }
+    });
+
+</script>
+</html>

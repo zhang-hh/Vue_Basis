@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #app{
+            margin: auto 100px;
+        }
+        .pink{
+            display: inline-block;
+            background-color: pink;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-a class="pink"></v-a>
+    <br><br>
+    <v-b class="pink"></v-b>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.min.js"></script>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    const a = {
+    	data(){
+    		return {
+    			msg:'a-message'
+            }
+        },
+    	template:'<div>{{msg}}</div>',
+        mounted(){
+	        PubSub.subscribe('changeText', (msg, data) =>{
+		        console.log(msg, data);
+		        this.msg = data;
+	        });
+        }
+    };
+    const b = {
+	    data(){
+		    return {
+			    msg:'b-message'
+		    }
+	    },
+	    template:'<div @click="changeB">{{msg}}</div>',
+	    methods:{
+		    changeB(){
+			    PubSub.publishSync('changeText', this.msg);
+		    }
+	    }
+    };
+
+    new Vue({
+        el:'#app',
+        components:{
+        	'v-a':a,
+            'v-b':b,
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <span>firstName:</span> <input type="text" v-model="firstName"> <br>
+    <span>lastName:</span> <input type="text" v-model="lastName"> <br>
+    <span>fullName:</span> <input type="text" v-model="fullName()"> <br> <!--在这里需要调用-->
+
+    <!--    写在事件和普通指令是不一样的
+        事件@click = fullName()的时候是在传参
+        v-model="fullName()" 中是函数调用
+    -->
+    {{test}}
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+	const vm = new Vue({
+		el:'#app',
+		data:{
+			firstName:'M',
+			lastName:'AC',
+			fullName1:'M-AC',
+			test:'test'
+		},
+		/*computed:{
+			//获取关联数据
+			fullName(){
+				const {firstName,lastName} = this;
+				return `${firstName}-${lastName}`
+			},
+		},*/
+
+		/*
+            计算属性 和 方法的区别
+                1. 方法的调用一直都是两次连续调用的 ;
+                    方法在任何一个在模板上使用的data数据产生变化 都会被执行两次
+                方法没有缓存
+                2. 计算属性的调用一直都是一次调用 ;
+                    计算属性只在自己关联的属性产生变化时才会被调用
+                计算属性拥有缓存
+             */
+        methods:{
+        	//初始化的时候,如果模板上调用了,该函数会被掉两次,两次两次的
+	        //任何一个在模板上使用的data数据产生变化 函数都会被执行两次
+	        fullName(){
+		        console.log('methods')
+		        const {firstName,lastName} = this;
+		        return `${firstName}-${lastName}`
+	        },
+        }
+	})
+</script>
+</html>
+</body>
+</html>

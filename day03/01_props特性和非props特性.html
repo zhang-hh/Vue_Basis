@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .pink{
+            color: pink;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-zhh class="pink" name="zhh"></v-zhh>
+<!--    在这里class是非props特性的属性
+        name是props特性的属性
+        组件不是继承props特性的属性
+
+        如何判断是是否有props特性: 看在props里面有没有
+-->
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        components:{
+        	'v-zhh':{
+        		props:['name'],
+        		template:'<span>{{name}}</span>'
+            }
+        }
+    })
+</script>
+</html>

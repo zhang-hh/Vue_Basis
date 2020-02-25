@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" placeholder="请输入查询字符" v-model="secherName">
+    <ul>
+        <li v-for="(item,index) in filterMsg" :key="index">
+            <span>{{item.name}}</span>
+            <span>{{item.age}}</span>
+        </li>
+    </ul>
+    <button @click="handleSort(1)">升序</button>
+    <button @click="handleSort(-1)">降序</button>
+    <button @click="handleSort(0)">原序</button>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+	        secherName:'',
+            sortType:0,
+	        msg:[
+	        	{name:'tom',age:18},
+		        {name:'jack',age:16},
+		        {name:'rose',age:20},
+		        {name:'json',age:17},
+		        {name:'dack',age:15},
+	        ]
+        },
+        //计算属性
+        computed:{
+        	filterMsg(){
+        		//获取到相关的数据
+                const {secherName,msg,sortType} = this;
+        		let newMsg;
+		        newMsg = msg.filter((item) =>{
+        		    return item.name.includes(secherName)
+                    // return item.name.indexOf(secherName)!== -1;//这里的是我老忘记的
+        		});
+		        //处理排序问题
+                if (sortType){ //这里是我容易错的 是0进入不了这个循环
+	                newMsg.sort((p1,p2) =>{
+	                	//升序
+                        if (sortType === 1) return p1.age -p2.age;
+                        //降序
+                        else return p2.age -p1.age;
+	                });
+                }
+                return newMsg;
+            }
+        },
+        methods:{
+	        handleSort(sortType){
+	        	this.sortType = sortType;
+            }
+        }
+    })
+</script>
+</html>

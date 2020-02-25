@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <li v-for="(value,key,index) in obj" :key="index">
+        <span>{{key}}</span>
+        <span>{{value}}</span>
+        <button @click="update(index)">update</button>
+    </li>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        //因为data上的属性会转绑在vm实例身上,所有能通过this.获取到data的属性
+        data:{
+        	obj:{
+        		name:'zhh',
+                age:'23'
+
+            }
+        },
+        methods:{
+	        update(index){
+	        	if (index===0) this.obj.name = 'didaite'
+                if (index===1)this.obj.age = 19;
+
+		        //不能通过这样新增对象的属性
+		        // 虽然是在model层数据已经得到,但是没有更新到界面上
+
+                /*要在data中进行数据注册*/
+		        //this.obj.hobby = '吃东西';
+
+                /*向嵌套对象增加响应式属性*/
+                Vue.set(this.obj,'hobby','吃东西')
+            }
+        }
+
+    })
+</script>
+</html>

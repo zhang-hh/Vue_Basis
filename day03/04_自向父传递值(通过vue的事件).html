@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .pink{
+            display: inline-block;
+            background-color: pink;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-arc class="pink" :num="num" @add="add"></v-arc>
+    <v-arc class="pink" :num="num" @add="add"></v-arc>
+    <i class="pink" style="background-color: blue">{{appNum}}</i>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*子组件向父组件传递数据
+    *   1.自组价要在标签自定义事件,父组件在methos中定义一个函数
+    *       自定义事件是什么? v-on 简写为 @加上事件名
+    *   2.在子组件中去触发自定义事件,this.$emit('事件',数据)
+    *
+    * */
+    const arc = {
+	    props:['num'],
+	    //注意子组件不能写data对象,是data函数调用的返回值是一个对象
+	    data(){
+		    return{
+			    arcNum:this.num,
+                step:1
+		    }
+	    },
+	    template:'<i @click="add">{{arcNum}}</i>',
+	    methods:{
+		    add(){
+			    this.arcNum++;
+			    this.$emit('add',this.step)
+		    }
+	    }
+
+    };
+    new Vue({
+        el:'#app',
+        data:{
+	        num:0,
+            appNum:0
+        },
+        methods: {
+        	add(step) {
+        		this.appNum += step;
+	        }
+        },
+        components:{
+        	'v-arc':arc
+        }
+    })
+</script>
+</html>

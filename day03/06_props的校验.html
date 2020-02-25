@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .pink{
+            display: inline-block;
+            background-color: pink;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-arc class="pink" :num="num"></v-arc>
+    <v-arc class="pink" :num="num"></v-arc>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*props属性的校验只能是存在于他是一个对象的时候
+    * 当props是一个数组的时候只能选择接受那个父组件传递来的属性*/
+	new Vue({
+		el:'#app',
+		data:{
+			num:100,
+		},
+		components:{
+			'v-arc':{
+				props:{
+					num:{
+						type:Number,
+                        required:true, //必须值,一般来说default和require是不会一起使用的
+                        //自定义验证,在这里可以写很多复杂的校验逻辑
+                        validator:function (value) {
+							//这里的value就是传递过来的数据
+                            return value >10;
+                        }
+
+					},
+
+                },
+				//注意子组件不能写data对象,是data函数调用的返回值是一个对象
+				data(){
+					return{
+						arcNum:this.num
+					}
+				},
+				template:'<i @click="add">{{arcNum}}</i>',
+				methods:{
+					add(){
+						this.arcNum++
+					}
+				}
+			}
+		}
+	})
+</script>
+</html>

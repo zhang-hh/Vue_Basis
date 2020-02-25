@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(obj,index) in persons" :key="obj.id">
+            <span>{{obj.name}}</span>
+            <span>{{obj.age}}</span>
+            <input type="text">
+        </li>
+    </ul>
+    <button @click="add">添加一个小王</button>
+    <button @click="remove">移出第一个</button>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+	        persons: [
+		        { id:1, name: '小张', age: 13},
+		        { id:2, name: '小李', age: 12}
+	        ]
+        },
+        methods:{
+        	add(){
+        		this.persons.unshift({id:this.persons.length+1,name:'小王',age:14})
+            },
+	        remove(){
+        		this.persons.shift()
+            }
+        }
+    })
+</script>
+</html>

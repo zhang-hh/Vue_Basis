@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .pink{
+            display: inline-block;
+            background-color: pink;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-arc class="pink" :num="num" :add="add"></v-arc>
+    <v-arc class="pink" :num="num" :add="add"></v-arc>
+    <i class="pink" style="background-color: blue">{{appNum}}</i>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*子组件向父组件传递数据
+   *   1.父组件通过标签属性向子组件传递一个方法
+       2.子组件通过props来接受这个方法
+       3.在自身methos调用这个方法,通过函数传参的方式传递数据
+       *
+       * 但是这个方案:是父亲主动的,如果父组件不先给子组件传递一个函数
+       * 的话,子组件是不能把数据传递给父组件的
+     */
+   /
+    const arc = {
+	    props:{
+	    	num:Number,
+            add:Function
+        },
+	    //注意子组件不能写data对象,是data函数调用的返回值是一个对象
+	    data(){
+		    return{
+			    arcNum:this.num,
+                step:1
+		    }
+	    },
+	    template:'<i @click="addNum">{{arcNum}}</i>',
+	    methods:{
+		    addNum(){
+			    this.arcNum++;
+			    this.add(this.step)
+		    }
+	    }
+
+    };
+    new Vue({
+        el:'#app',
+        data:{
+	        num:0,
+            appNum:0
+        },
+        methods: {
+        	add(step) {
+        		this.appNum += step;
+	        }
+        },
+        components:{
+        	'v-arc':arc
+        }
+    })
+</script>
+</html>

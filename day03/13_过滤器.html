@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{date | filterDate}}
+</div>
+</body>
+<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*过滤器一般用于数据的格式化*/
+    //全局过滤器
+
+    /*1.插值表达式是根据过滤器的返回值来决定的
+    * 2.只要使用过滤器就会触发过滤器的回调函数
+    * 3.回调函数的value就是当前要过滤的值*/
+    Vue.filter('filterDate', function (value) {
+    	return moment(value).format('YYYY-MM-DD hh:mm:ss a')
+    })
+    new Vue({
+        el:'#app',
+        data:{
+        	date:new Date()
+        }
+    })
+</script>
+</html>

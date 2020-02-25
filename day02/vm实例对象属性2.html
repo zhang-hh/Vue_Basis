@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{test}}
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+	const vm = new Vue({
+		el:'#app',
+		data:{
+			test:'test'
+		}
+	})
+
+	// vm.$on('damu',() => {console.log('damu1')});
+	// vm.$on('damu',() => {console.log('damu2')});
+	// vm.$on('damu',() => {console.log('damu3')});
+	// vm.$on('damu',() => {console.log('damu4')});
+	// vm.$on('damu',() => {console.log('damu5')});
+
+/* 移除自定义事件监听器。
+     如果没有提供参数，则移除所有的事件监听器；
+     如果只提供了事件，则移除该事件所有的监听器；
+     如果同时提供了事件与回调，则只移除这个回调的监听器
+*/
+    function six() {
+	    console.log('damu6');
+    }
+	vm.$on('damu',six);
+    setInterval(() =>{
+        vm.$emit('damu')
+    },100);
+    setTimeout(()=>{
+        vm.$off('damu',six)
+    },200)
+
+	// setTimeout(() =>{
+	// 	vm.$emit('damu');
+	// },1000);
+    //
+	// vm.$off()
+
+
+
+
+
+</script>
+</html>

@@ -9,6 +9,7 @@
     <input type="text" v-model="serchName">
     <ul>
         <li v-for="(item,index) in filterMsg" :key="index">
+<!--            :key 是将key属性交给vue管理,使每个渲染出来的dom对象都不是同一个-->
            {{index+1}}--{{item.name}}--{{item.age}}
         </li>
     </ul>

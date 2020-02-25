@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .pink{
+            display: inline-block;
+            background-color: pink;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-arc class="pink" :num="num"></v-arc>
+    <v-arc class="pink" :num="num"></v-arc>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+
+    /*父组件向子组件传递数据
+    *   1.父组件要在自组价的标签自定义属性传值
+    *       什么是自定义属性: v-bind 简写为 :加上属性
+    *   2.自组价在配置props中接收检验父组件传来的数据
+    *
+    * 但是注意:子组件不能直接修改父组件的数据,
+    *   如果想要更改,只能子组件在自己的data中转存一份
+    *   子组件修改的是自己转存的那份数据,并不会污染到父组件的数据源
+    *   那么他就使用自己存的那份显示在界面上*/
+
+    new Vue({
+        el:'#app',
+        data:{
+	        num:0,
+        },
+        components:{
+        	'v-arc':{
+        		props:['num'],
+                //注意子组件不能写data对象,是data函数调用的返回值是一个对象
+                data(){
+        			return{
+        				arcNum:this.num
+                    }
+                },
+        		template:'<i @click="add">{{arcNum}}</i>',
+                methods:{
+        			add(){
+                        this.arcNum++
+                    }
+                }
+
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*v-leave是没有用的,只是对称*/
+        .v-leave{opacity: 1;color: red}
+        .v-leave-active{transition: 10s all}
+        .v-leave-to{opacity: 0; color: deeppink;}
+
+        .v-enter{opacity: 0;color: deeppink;}
+        .v-enter-active{transition: 10s all}
+        .v-enter-to{opacity: 1; color: red;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="change">点击切换</button>
+    <transition> <!--在transition中如果加上了name属性,那么class就是的移name的值开头了-->
+        <div v-show="flag">哈哈哈</div>
+    </transition>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*Vue 在插入、更新或者移除 DOM 时，
+    提供多种不同方式的应用过渡效果。 也就是在v-if ,v-show的时候使用*/
+    new Vue({
+        el:'#app',
+        data:{
+	        flag:true,
+        },
+        methods:{
+        	change(){
+        		this.flag = !this.flag;
+            }
+        }
+    })
+</script>
+</html>

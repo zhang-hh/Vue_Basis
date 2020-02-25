@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--如果在组件上使用@符号 相当于是给当前这个组件定义vue事件-->
+<!--    v-btn.$on("click",handleC) 相当于这句话
+         v-btn.$emit("click) 然后要想办法触发
+-->
+    <v-btn @click="handle"></v-btn>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        methods:{
+	        handle(){
+		        console.log('app handle')
+            }
+        },
+        components:{
+        	'v-btn':{
+        		template:'<button @click="handle">click</button>',  
+                methods: {
+	                handle() {
+		                //console.log(this) //这里的this就是v-btn组件
+		                 console.log('.....');
+                    //    他自己的自定义事件可以这样来触发
+                        this.$emit('click')
+	                }
+                }
+	        }
+        }
+    })
+</script>
+</html>
