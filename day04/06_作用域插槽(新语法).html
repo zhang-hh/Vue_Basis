@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--    任何出现在父组件模板的东西都是有父组件进行渲染的-->
+<!--    使用slot-scope的时候这个属性不能写在组件标签上
+        应该使用template标签将父组件想要传递的标签包裹起来,
+        把slot-scope写在template
+-->
+    <template>
+        <Zhh >
+            <template v-slot:one="{data}">
+                <span >{{data}}</span>
+            </template>
+            <template #two="{data}">
+                <span>{{data}}</span>
+            </template>
+        </Zhh>
+    </template>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*作用域插槽可以使组件向父组件提供数据*/
+	const Zhh = {
+		template:`
+            <div>
+                <slot name="one" data="这是子组件的数据1"><i>哈哈哈哈</i></slot>
+                <slot name="two" data="这是子组件的数据2"><i>哈哈哈哈</i></slot>
+            </div>
+        `
+	}
+	new Vue({
+		el:'#app',
+		components:{Zhh}
+	})
+</script>
+</html>
