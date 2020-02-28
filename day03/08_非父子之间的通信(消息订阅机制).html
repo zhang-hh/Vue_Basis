@@ -36,8 +36,9 @@
         },
     	template:'<div>{{msg}}</div>',
         mounted(){
-	        PubSub.subscribe('changeText', (msg, data) =>{
-		        console.log(msg, data);
+	        PubSub.subscribe('changeText', (name, data) =>{
+		        //这里的name是一个坑,name是前边的changeText,预先绑定好的
+	        	console.log(name, data);
 		        this.msg = data;
 	        });
         }

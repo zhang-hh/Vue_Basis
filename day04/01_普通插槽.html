@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--    任何出现在父组件模板的东西都是有父组件进行渲染的-->
+    <Zhh>
+        <span>APP的数据1</span>
+    </Zhh>
+    <Zhh>
+<!--        <span>APP的数据2</span>-->
+    </Zhh>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*插槽在覆盖的时候,会将template的数据全部替换成<Zhh></Zhh>的,
+    然后里面的span会将<slot></slot>覆盖 ,slot就是一个占位,
+    让父组件动态的往里面传递数据
+    当父组件没有向子组件传递数据的时候,就会显示子组件的数据(默认值)*/
+    //在vue的脚手架的话template是直接解析成render函数的,
+    // 不会解析成template标签
+    const Zhh = {
+    	template:`
+            <div>
+                <slot><i>哈哈哈哈</i></slot>
+            </div>
+        `
+    }
+    new Vue({
+        el:'#app',
+        components:{Zhh}
+    })
+</script>
+</html>

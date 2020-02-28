@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--    任何出现在父组件模板的东西都是有父组件进行渲染的-->
+    <Zhh>
+        <span slot="one">APP的数据1</span>
+        <span slot="two">APP的数据2</span>
+<!--        <span>xxxx</span>-->
+    </Zhh>
+</div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    /*span会分别把这两个<slot><i>哈哈哈哈</i></slot>换掉
+    * */
+	const Zhh = {
+		template:`
+            <div>
+                <slot name="one"><i>哈哈哈哈</i></slot>
+                <slot name="one"><i>哈哈哈哈</i></slot>
+                <slot name="two"><i>哈哈哈哈</i></slot>
+                <slot><i>哈哈哈哈</i></slot>
+            </div>
+        `
+	}
+	new Vue({
+		el:'#app',
+		components:{Zhh}
+	})
+</script>
+</html>
